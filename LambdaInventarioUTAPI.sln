@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LambdaInventarioUTAPI", "LambdaInventarioUTAPI\LambdaInventarioUTAPI.csproj", "{C3649361-9D98-4686-8609-ABFB11F9C361}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{A657AD15-8588-426C-B41F-766BC0955F52}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3649361-9D98-4686-8609-ABFB11F9C361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3649361-9D98-4686-8609-ABFB11F9C361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3649361-9D98-4686-8609-ABFB11F9C361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3649361-9D98-4686-8609-ABFB11F9C361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A657AD15-8588-426C-B41F-766BC0955F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A657AD15-8588-426C-B41F-766BC0955F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A657AD15-8588-426C-B41F-766BC0955F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A657AD15-8588-426C-B41F-766BC0955F52}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {818CA262-D850-4356-85FA-E16CE5AA384B}
+	EndGlobalSection
+EndGlobal
