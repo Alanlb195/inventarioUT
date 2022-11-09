@@ -7,32 +7,28 @@ namespace Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(@"
-                        CREATE PROCEDURE dbo.getTalleresPorEdificioId
-                        @id int
-                        AS
+                        CREATE PROCEDURE getTalleresPorEdificioId(IN IdEd Int(9))
                         BEGIN
                         SELECT *
                         FROM Taller
-                        WHERE idEdificio = @id;
+                        WHERE idEdificio = IdEd;
                         END
                         ");
 
             migrationBuilder.Sql(@"
-                        CREATE PROCEDURE dbo.obtenerHerramientasPorId
-                        @id int
-                        AS
+                        CREATE PROCEDURE obtenerHerramientasPorId(IN IdHer Int(9))
                         BEGIN
                         SELECT *
                         FROM herramienta
-                        WHERE idTaller = @id;
+                        WHERE idTaller = IdHer;
                         END
                         ");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("DROP PROCEDURE dbo.getTalleresPorEdificioId");
-            migrationBuilder.Sql("DROP PROCEDURE dbo.obtenerHerramientasPorId");
+            migrationBuilder.Sql("DROP PROCEDURE getTalleresPorEdificioId");
+            migrationBuilder.Sql("DROP PROCEDURE obtenerHerramientasPorId");
         }
     }
 }

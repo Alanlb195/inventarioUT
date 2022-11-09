@@ -1,74 +1,88 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "Edificio",
                 columns: table => new
                 {
                     IdEdificio = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Edificio", x => x.IdEdificio);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Estatus",
                 columns: table => new
                 {
                     IdEstatus = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Estatus", x => x.IdEstatus);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Marca",
                 columns: table => new
                 {
                     IdMarca = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Marca", x => x.IdMarca);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "RolUsuario",
                 columns: table => new
                 {
                     IdRolUsuario = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RolUsuario", x => x.IdRolUsuario);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Taller",
                 columns: table => new
                 {
                     IdTaller = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Aula = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Aula = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     IdEdificio = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -80,17 +94,21 @@ namespace Data.Migrations
                         principalTable: "Edificio",
                         principalColumn: "IdEdificio",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Usuario",
                 columns: table => new
                 {
                     IdUsuario = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Apellido = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Correo = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Matricula = table.Column<int>(type: "int", nullable: false),
                     IdRolUsuario = table.Column<int>(type: "int", nullable: false)
                 },
@@ -103,17 +121,20 @@ namespace Data.Migrations
                         principalTable: "RolUsuario",
                         principalColumn: "IdRolUsuario",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Herramienta",
                 columns: table => new
                 {
                     IdHerramienta = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
-                    Urlimagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Urlimagen = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     IdMarca = table.Column<int>(type: "int", nullable: false),
                     IdTaller = table.Column<int>(type: "int", nullable: false),
                     IdEstatus = table.Column<int>(type: "int", nullable: false)
@@ -139,14 +160,15 @@ namespace Data.Migrations
                         principalTable: "Taller",
                         principalColumn: "IdTaller",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Orden",
                 columns: table => new
                 {
                     IdOrden = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     IdUsuario = table.Column<int>(type: "int", nullable: false),
                     IdEstatus = table.Column<int>(type: "int", nullable: false)
                 },
@@ -165,14 +187,15 @@ namespace Data.Migrations
                         principalTable: "Usuario",
                         principalColumn: "IdUsuario",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "DetalleOrden",
                 columns: table => new
                 {
                     IdDetalleOrden = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     IdOrden = table.Column<int>(type: "int", nullable: false),
                     IdHerramienta = table.Column<int>(type: "int", nullable: false)
@@ -194,14 +217,15 @@ namespace Data.Migrations
                         principalColumn: "IdOrden",
                         onDelete: ReferentialAction.NoAction,
                         onUpdate: ReferentialAction.NoAction);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Multa",
                 columns: table => new
                 {
                     IdMulta = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     IdOrden = table.Column<int>(type: "int", nullable: false),
                     IdEstatus = table.Column<int>(type: "int", nullable: false)
                 },
@@ -219,19 +243,19 @@ namespace Data.Migrations
                         name: "FK_Multa_Orden_IdOrden",
                         column: x => x.IdOrden,
                         principalTable: "Orden",
-                        principalColumn: "IdOrden",
                         onDelete: ReferentialAction.NoAction,
                         onUpdate: ReferentialAction.NoAction);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Plazo",
                 columns: table => new
                 {
                     IdPlazo = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Inicio = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Fin = table.Column<DateTime>(type: "datetime2", nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Inicio = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Fin = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     IdOrden = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -243,7 +267,8 @@ namespace Data.Migrations
                         principalTable: "Orden",
                         principalColumn: "IdOrden",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DetalleOrden_IdHerramienta",

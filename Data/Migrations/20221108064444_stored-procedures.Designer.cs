@@ -3,7 +3,6 @@ using System;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -12,25 +11,21 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(InventarioUTDBContext))]
-    [Migration("20221103093939_Initial")]
-    partial class Initial
+    [Migration("20221108064444_stored-procedures")]
+    partial class storedprocedures
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.10")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("InventarioUTDB.Data.DetalleOrden", b =>
+            modelBuilder.Entity("Data.Models.DetalleOrden", b =>
                 {
                     b.Property<int>("IdDetalleOrden")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdDetalleOrden"), 1L, 1);
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
@@ -50,47 +45,41 @@ namespace Data.Migrations
                     b.ToTable("DetalleOrden", (string)null);
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Edificio", b =>
+            modelBuilder.Entity("Data.Models.Edificio", b =>
                 {
                     b.Property<int>("IdEdificio")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEdificio"), 1L, 1);
-
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("IdEdificio");
 
                     b.ToTable("Edificio", (string)null);
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Estatus", b =>
+            modelBuilder.Entity("Data.Models.Estatus", b =>
                 {
                     b.Property<int>("IdEstatus")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEstatus"), 1L, 1);
-
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("IdEstatus");
 
                     b.ToTable("Estatus");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Herramienta", b =>
+            modelBuilder.Entity("Data.Models.Herramienta", b =>
                 {
                     b.Property<int>("IdHerramienta")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdHerramienta"), 1L, 1);
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
@@ -106,11 +95,11 @@ namespace Data.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Urlimagen")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("IdHerramienta");
 
@@ -123,30 +112,26 @@ namespace Data.Migrations
                     b.ToTable("Herramienta", (string)null);
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Marca", b =>
+            modelBuilder.Entity("Data.Models.Marca", b =>
                 {
                     b.Property<int>("IdMarca")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMarca"), 1L, 1);
-
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("IdMarca");
 
                     b.ToTable("Marca", (string)null);
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Multa", b =>
+            modelBuilder.Entity("Data.Models.Multa", b =>
                 {
                     b.Property<int>("IdMulta")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMulta"), 1L, 1);
 
                     b.Property<int>("IdEstatus")
                         .HasColumnType("int");
@@ -160,16 +145,14 @@ namespace Data.Migrations
 
                     b.HasIndex("IdOrden");
 
-                    b.ToTable("Multa");
+                    b.ToTable("Multa", (string)null);
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Orden", b =>
+            modelBuilder.Entity("Data.Models.Orden", b =>
                 {
                     b.Property<int>("IdOrden")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdOrden"), 1L, 1);
 
                     b.Property<int>("IdEstatus")
                         .HasColumnType("int");
@@ -186,22 +169,20 @@ namespace Data.Migrations
                     b.ToTable("Orden", (string)null);
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Plazo", b =>
+            modelBuilder.Entity("Data.Models.Plazo", b =>
                 {
                     b.Property<int>("IdPlazo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPlazo"), 1L, 1);
-
                     b.Property<DateTime>("Fin")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("IdOrden")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Inicio")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("IdPlazo");
 
@@ -210,41 +191,37 @@ namespace Data.Migrations
                     b.ToTable("Plazo", (string)null);
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.RolUsuario", b =>
+            modelBuilder.Entity("Data.Models.RolUsuario", b =>
                 {
                     b.Property<int>("IdRolUsuario")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRolUsuario"), 1L, 1);
-
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("IdRolUsuario");
 
                     b.ToTable("RolUsuario", (string)null);
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Taller", b =>
+            modelBuilder.Entity("Data.Models.Taller", b =>
                 {
                     b.Property<int>("IdTaller")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTaller"), 1L, 1);
-
                     b.Property<string>("Aula")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("IdEdificio")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("IdTaller");
 
@@ -253,21 +230,19 @@ namespace Data.Migrations
                     b.ToTable("Taller", (string)null);
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Usuario", b =>
+            modelBuilder.Entity("Data.Models.Usuario", b =>
                 {
                     b.Property<int>("IdUsuario")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"), 1L, 1);
-
                     b.Property<string>("Apellido")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Correo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("IdRolUsuario")
                         .HasColumnType("int");
@@ -277,7 +252,7 @@ namespace Data.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("IdUsuario");
 
@@ -286,15 +261,15 @@ namespace Data.Migrations
                     b.ToTable("Usuario", (string)null);
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.DetalleOrden", b =>
+            modelBuilder.Entity("Data.Models.DetalleOrden", b =>
                 {
-                    b.HasOne("InventarioUTDB.Data.Herramienta", "Herramienta")
+                    b.HasOne("Data.Models.Herramienta", "Herramienta")
                         .WithMany("DetalleOrdenes")
                         .HasForeignKey("IdHerramienta")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InventarioUTDB.Data.Orden", "Orden")
+                    b.HasOne("Data.Models.Orden", "Orden")
                         .WithMany("DetalleOrdenes")
                         .HasForeignKey("IdOrden")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -305,21 +280,21 @@ namespace Data.Migrations
                     b.Navigation("Orden");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Herramienta", b =>
+            modelBuilder.Entity("Data.Models.Herramienta", b =>
                 {
-                    b.HasOne("InventarioUTDB.Data.Estatus", "Estatus")
+                    b.HasOne("Data.Models.Estatus", "Estatus")
                         .WithMany("Herramientas")
                         .HasForeignKey("IdEstatus")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InventarioUTDB.Data.Marca", "Marca")
+                    b.HasOne("Data.Models.Marca", "Marca")
                         .WithMany("Herramientas")
                         .HasForeignKey("IdMarca")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InventarioUTDB.Data.Taller", "Taller")
+                    b.HasOne("Data.Models.Taller", "Taller")
                         .WithMany("Herramientas")
                         .HasForeignKey("IdTaller")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -332,15 +307,15 @@ namespace Data.Migrations
                     b.Navigation("Taller");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Multa", b =>
+            modelBuilder.Entity("Data.Models.Multa", b =>
                 {
-                    b.HasOne("InventarioUTDB.Data.Estatus", "Estatus")
+                    b.HasOne("Data.Models.Estatus", "Estatus")
                         .WithMany("Multas")
                         .HasForeignKey("IdEstatus")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InventarioUTDB.Data.Orden", "Orden")
+                    b.HasOne("Data.Models.Orden", "Orden")
                         .WithMany()
                         .HasForeignKey("IdOrden")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -351,15 +326,15 @@ namespace Data.Migrations
                     b.Navigation("Orden");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Orden", b =>
+            modelBuilder.Entity("Data.Models.Orden", b =>
                 {
-                    b.HasOne("InventarioUTDB.Data.Estatus", "Estatus")
+                    b.HasOne("Data.Models.Estatus", "Estatus")
                         .WithMany("Ordenes")
                         .HasForeignKey("IdEstatus")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InventarioUTDB.Data.Usuario", "Usuario")
+                    b.HasOne("Data.Models.Usuario", "Usuario")
                         .WithMany("Ordenes")
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -370,9 +345,9 @@ namespace Data.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Plazo", b =>
+            modelBuilder.Entity("Data.Models.Plazo", b =>
                 {
-                    b.HasOne("InventarioUTDB.Data.Orden", "Orden")
+                    b.HasOne("Data.Models.Orden", "Orden")
                         .WithMany()
                         .HasForeignKey("IdOrden")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -381,9 +356,9 @@ namespace Data.Migrations
                     b.Navigation("Orden");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Taller", b =>
+            modelBuilder.Entity("Data.Models.Taller", b =>
                 {
-                    b.HasOne("InventarioUTDB.Data.Edificio", "Edificio")
+                    b.HasOne("Data.Models.Edificio", "Edificio")
                         .WithMany("Talleres")
                         .HasForeignKey("IdEdificio")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -392,9 +367,9 @@ namespace Data.Migrations
                     b.Navigation("Edificio");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Usuario", b =>
+            modelBuilder.Entity("Data.Models.Usuario", b =>
                 {
-                    b.HasOne("InventarioUTDB.Data.RolUsuario", "RolUsuario")
+                    b.HasOne("Data.Models.RolUsuario", "RolUsuario")
                         .WithMany("Usuarios")
                         .HasForeignKey("IdRolUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -403,12 +378,12 @@ namespace Data.Migrations
                     b.Navigation("RolUsuario");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Edificio", b =>
+            modelBuilder.Entity("Data.Models.Edificio", b =>
                 {
                     b.Navigation("Talleres");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Estatus", b =>
+            modelBuilder.Entity("Data.Models.Estatus", b =>
                 {
                     b.Navigation("Herramientas");
 
@@ -417,32 +392,32 @@ namespace Data.Migrations
                     b.Navigation("Ordenes");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Herramienta", b =>
+            modelBuilder.Entity("Data.Models.Herramienta", b =>
                 {
                     b.Navigation("DetalleOrdenes");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Marca", b =>
+            modelBuilder.Entity("Data.Models.Marca", b =>
                 {
                     b.Navigation("Herramientas");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Orden", b =>
+            modelBuilder.Entity("Data.Models.Orden", b =>
                 {
                     b.Navigation("DetalleOrdenes");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.RolUsuario", b =>
+            modelBuilder.Entity("Data.Models.RolUsuario", b =>
                 {
                     b.Navigation("Usuarios");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Taller", b =>
+            modelBuilder.Entity("Data.Models.Taller", b =>
                 {
                     b.Navigation("Herramientas");
                 });
 
-            modelBuilder.Entity("InventarioUTDB.Data.Usuario", b =>
+            modelBuilder.Entity("Data.Models.Usuario", b =>
                 {
                     b.Navigation("Ordenes");
                 });
